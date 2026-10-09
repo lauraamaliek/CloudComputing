@@ -93,6 +93,29 @@ namespace IBASEmployeeService.Controllers
             };
             return employees;
         }
+        
+        [HttpGet("GetEmployees/{afdeling}")]
+        public IEnumerable<Employee> GetEmployeesByDepartment(string afdeling)
+        {
+            var employees = Get();
+
+            var departmentEmployees = employees.Where(e =>
+                e.Department.Name.Equals(afdeling, StringComparison.OrdinalIgnoreCase));
+
+            return departmentEmployees;
+        }
+        
+        [HttpGet("GetEmployeesByDepartmentID/{id}")]
+        public IEnumerable<Employee> GetEmployeesByDepartment(int id)
+        {
+            var employees = Get();
+
+            var departmentEmployees = employees.Where(e =>
+                e.Department.Id == id);
+
+            return departmentEmployees;
+        }
+
     }
 
 
